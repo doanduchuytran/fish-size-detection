@@ -4,25 +4,109 @@ This repository implements fish detection and pose (keypoint) estimation for aqu
 It is built on top of the **Ultrlytics** YOLO framework (cloned into this repo) and adds:
 - Custom dataset configuration (FishKP-style: bounding box + 4 keypoints)
 - Training / evaluation scripts
-## Overview
-## Dataset
-## Model Architecture
-## Installation
-**Option A - Recommended: Use a Python virtual environment**
-```bash
-python -m venv .venv
-source .venv/bin/activate
 
-python -m pip install --upgrade pip
-pip install -r installation/requirements.txt
+---
+
+## Overview
+**Goal:** Detect fish and estimate 4 keypoints to support downstream tasks such as:
+- fish size estimation (length/width measurement from keypoints)
+- posture / orientation analysis
+- automation for aquaculture monitoring
+
+**Base framework:** Ultralytics YOLO-Pose (e.g., YOLOv8-Pose / YOLOv11-Pose depending on your experiments)
+
+**What’s in this repo (high level):**
+- `ultralytics/`: Cloned Ultralytics repository (main framework). Inside this repo, we put the script and dataset of project.
+- `installations`: Contains dockerfiles, run docker scripts.
+- `assets`: Images 
+
+--- 
+
+## Dataset
+This project use a public dataset. This dataset contains underwater images of fish captured in a controlled tank environment. Each image is annotated with bounding boxes and keypoints following the YOLO-Pose format.
+
+The dataset is designed for:
+- Fish detection
+- Fish pose/keypoint estimation
+- Fish size estimation based on geometric measurements
+
+Images include multiple fish per frame, reflecting realistic aquaculture monitoring conditions.
+
+This is the link to get the dataset: https://drive.google.com/drive/folders/14G5qUpQH5qdSwMXRlEMci_c-Zf4z_bZS?usp=drive_link
+
+After downloading the dataset, extract and reorganize the folder structure following this structure.
+
+```text
+datasets/
+├── images/
+│   ├── train/
+│   ├── val/
+│   └── test/
+├── labels/
+│   ├── train/
+│   ├── val/
+│   └── test/
+└── data.yaml
 ```
-## Training
-## Inference
+Finally, put the dataset into ultralytics directory. Therefore, the structure of the project directory is as follow:
+```text
+fish-size-detection/
+├── installation/
+├── ultralytics/
+│   ├── datasets
+```
+
+---
+
+## Model Architecture
+<p align="center">
+  <img src="assets/model_architecture.png" width="600">
+</p>
+
+## Installation
+**Build a docker images for run inference on CPU**
 ```bash
-python predict.py
+cd installations
+docker build -f Dockerfile.cpu -t yolov8-cpu .
 ```
+
+**Build a docker images for training on GPU**
+```bash
+cd installations
+docker build -f Dockerfile.gpu -t yolov8-gpu .
+```
+
+**Run CPU container**
+```bash
+chmod +x run_docker_cpu.sh
+./run_docker_cpu.sh
+```
+
+**Run GPU container**
+```bash
+chmod +x run_docker_gpu.sh
+./run_docker_cpu.sh
+```
+
+---
+
+## Training
+Should run training on GPU.
+```bash
+python my_script_train.py
+```
+
+---
+
+## Inference
+Running inference on CPU.
+```bash
+python my_script_predict.py
+```
+---
+
 ## Results
-## Docker Usage
-## Citation
-## License
+<p align="center">
+  <img src="assets/results.png" width="600">
+</p>
 
