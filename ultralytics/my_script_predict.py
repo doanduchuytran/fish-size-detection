@@ -1,13 +1,13 @@
 from ultralytics import YOLO
 
 # Load trained weights (update path if different)
-model = YOLO("outputs/modified_yolov8_pose2/weights/best.pt")
+model = YOLO("my_outputs/train_outputs/yolov8_pose_proposed/weights/best.pt")
 
 # Run validation on the dataset defined in fish_keypoint.yaml
 results = model.val(
-    data="data.yaml",
-    name="fish-keypoint-yolo8n-mod",
-    project="runs/val",
+    data="data/data.yaml",
+    name="yolov8_pose_proposed_predict_test",
+    project="my_outputs/predict_outputs",
     split="test",
     imgsz=640,
     batch=64,

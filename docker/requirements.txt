@@ -1,4 +1,0 @@
-ultralytics
-# add more if you like, e.g.:
-# opencv-python
-# numpy
