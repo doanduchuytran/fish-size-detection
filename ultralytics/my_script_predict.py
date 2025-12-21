@@ -5,7 +5,7 @@ model = YOLO("my_outputs/train_outputs/yolov8_pose_proposed/weights/best.pt")
 
 # Run validation on the dataset defined in fish_keypoint.yaml
 results = model.val(
-    data="data/data.yaml",
+    data="datasets/data.yaml",
     name="yolov8_pose_proposed_predict_test",
     project="my_outputs/predict_outputs",
     split="test",

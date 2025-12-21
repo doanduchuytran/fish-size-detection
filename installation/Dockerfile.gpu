@@ -17,21 +17,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && ln -s /usr/bin/python3 /usr/bin/python \
     && rm -rf /var/lib/apt/lists/*
 
+# ---- Upgrade pip
+RUN python -m pip install --Upgrade pip setuptools wheel
+
+# ---- Working directory
 WORKDIR /workspace
 
-# ---- Install a Pascal-friendly PyTorch build (CUDA 11.8) ----
+# ---- Copy requirements first (better caching)
+COPY requirements.txt
+
+
+# ---- Install Pytorch CUDA 11.8
 RUN pip install --no-cache-dir \
-    torch==2.1.0+cu118 \
-    torchvision==0.16.0+cu118 \
-    --index-url https://download.pytorch.org/whl/cu118
-
-RUN pip install --no-cache-dir \
-    numpy==1.26.4 \
-    "opencv-python<4.10" \
-    ultralytics
-
-# ---- Install Ultralytics ----
-RUN pip install --no-cache-dir ultralytics
-
+    -- index-url https://downloads.pytorch.org/whl/cu118 \
+    -r requirements.txt
+    
 # Default: open a shell, you run train.py manually
 CMD ["bash"]

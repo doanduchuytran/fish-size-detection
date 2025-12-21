@@ -1,0 +1,9 @@
+# PyTorch CUDA 11.8 (Pascal-friendly)
+torch==2.1.0+cu118
+torchvision==0.16+cu118
+
+# Core scientific stack
+numpy==1.26.4
+
+# Computer vision
+opencv-python<4.10

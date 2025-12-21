@@ -1,0 +1,31 @@
+# ========= Base image (CPU, Ubuntu 22.04) =========
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# System packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 \
+    python3-pip \
+    git \
+    wget \
+    nano \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    && ln -s /usr/bin/python3 /usr/bin/python \
+    && rm -rf /var/lib/apt/lists/*
+
+# Upgrade pip tooling
+RUN python -m pip install --upgrade pip setuptools wheel
+
+WORKDIR /workspace
+
+# Copy requirements first for better Docker caching
+COPY requirements_cpu.txt .
+
+# Install Python deps (CPU wheels)
+RUN pip install --no-cache-dir -r requirements_cpu.txt
+
+CMD ["bash"]
