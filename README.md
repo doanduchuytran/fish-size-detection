@@ -110,3 +110,7 @@ python my_script_predict.py
   <img src="assets/results.png" width="600">
 </p>
 
+<p align="center">
+  <img src="assets/metric_result.png" width="600">
+</p>
+
