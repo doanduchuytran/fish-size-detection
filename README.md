@@ -106,11 +106,24 @@ python my_script_predict.py
 ---
 
 ## Results
+**Learning curves of proposed model**
 <p align="center">
   <img src="assets/results.png" width="600">
 </p>
 
+**Normalized confusion matrix of proposed model**
 <p align="center">
-  <img src="assets/metric_result.png" width="600">
+  <img src="assets/confusion_matrix_normalized.png" width="600">
 </p>
 
+**Table of metric results of bounding box**
+| Model | precesion(B) | recall(B) | mAP50(B) | mAP50-95(B) |
+|---------------------:|-------------:|----------:|---------:|------------:|
+| Baseline YOLOv8-Pose | 0.77822 | 0.85863 | 0.88494 | 0.70527 |
+| Proposed YOLOv8-Pose | 0.78933 | 0.87924 | 0.90225 | 0.71564 |
+
+**Table of metric results of keypoints detection**
+| Model | precesion(B) | recall(B) | mAP50(B) | mAP50-95(B) |
+|---------------------:|-------------:|----------:|---------:|------------:|
+| Baseline YOLOv8-Pose | 0.78216 | 0.85201 | 0.88436 | 0.87753 |
+| Proposed YOLOv8-Pose | 0.79217 | 0.88241 | 0.90339 | 0.89883 |
