@@ -17,8 +17,9 @@ It is built on top of the **Ultrlytics** YOLO framework (cloned into this repo) 
 
 **What’s in this repo (high level):**
 - `ultralytics/`: Cloned Ultralytics repository (main framework). Inside this repo, we put the script and dataset of project.
-- `installations`: Contains dockerfiles, run docker scripts.
-- `assets`: Images 
+- `outputs/`: Contains train and prediction results.
+- `installations/`: Contains dockerfiles, run docker scripts.
+- `assets/`: Images 
 
 --- 
 
@@ -52,8 +53,11 @@ Finally, put the dataset into ultralytics directory. Therefore, the structure of
 ```text
 fish-size-detection/
 ├── installation/
+├── installation/
+│   ├── predict_outputs/
+├── ├── train_outputs/
 ├── ultralytics/
-│   ├── datasets
+│   ├── datasets/
 ```
 
 ---
